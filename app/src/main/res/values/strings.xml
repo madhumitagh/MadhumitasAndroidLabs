@@ -2,4 +2,11 @@
     <string name="app_name">Madhumita\'s Android Labs</string>
     <string name="hello_message">Hello World!</string>
     <string name="button_message">I\'m a button</string>
+    <string name="editmessage">I\'m an EditText</string>
+    <string name="hinttext">I\'m a HintText</string>
+    <string name="checkbox_message">Do you drink coffee?</string>
+    <string name="switch_message">Do you drink coffee?</string>
+    <string name="radioButton_message">Do you drink coffee?</string>
+
+
 </resources>
