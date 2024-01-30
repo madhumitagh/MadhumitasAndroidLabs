@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         variableBinding.myimagebutton.setOnClickListener( (click) -> {
                     int width = variableBinding.myimagebutton.getMeasuredWidth();
-                    int height = variableBinding.myimagebutton.getMeasuredWidth();
+                    int height = variableBinding.myimagebutton.getMeasuredHeight();
                     Toast.makeText(this, "The width = " + width + " and height = " + height, Toast.LENGTH_SHORT).show();
                 });
 
