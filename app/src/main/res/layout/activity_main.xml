@@ -44,6 +44,19 @@
         android:text="@string/radioButton_message" />
 
 
+    <ImageView
+        android:id="@+id/imageview"
+        android:src="@drawable/logoalgonquin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp" />
+
+    <ImageButton
+        android:src="@drawable/logoalgonquin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:id="@+id/myimagebutton" />
+
 
 
 

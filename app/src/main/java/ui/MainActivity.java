@@ -7,16 +7,17 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import algonquin.cst2335.ghos0042.R;
 import algonquin.cst2335.ghos0042.data.MainViewModel;
 import algonquin.cst2335.ghos0042.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
+    private ActivityMainBinding variableBinding;
     private MainViewModel model;
 
-    private ActivityMainBinding variableBinding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,32 +35,39 @@ public class MainActivity extends AppCompatActivity {
             variableBinding.textview.setText("Your edit text has: " + s);
         });
 
-        model.isSelected.observe( this, selected -> {
+        model.isSelected.observe(this, selected ->{
             variableBinding.checkbox.setChecked(selected);
             variableBinding.radioButton.setChecked(selected);
             variableBinding.switch1.setChecked(selected);
+
         });
 
-        variableBiniding.checkBox.setOnCheckedChangeListener( (btn, isChecked) -> {
+        variableBinding.checkbox.setOnCheckedChangeListener( (btn, isChecked) -> {
             model.isSelected.postValue(isChecked);
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText( this, "the value is now: " +isChecked, duration);
             toast.show();
         });
 
-        variableBiniding.switch1.setOnCheckedChangeListener( (btn, isChecked) -> {
+        variableBinding.switch1.setOnCheckedChangeListener( (btn, isChecked) -> {
             model.isSelected.postValue(isChecked);
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText( this, "the value is now: " +isChecked, duration);
             toast.show();
         });
 
-        variableBiniding.radioButton.setOnCheckedChangeListener( (btn, isChecked) -> {
+        variableBinding.radioButton.setOnCheckedChangeListener( (btn, isChecked) -> {
             model.isSelected.postValue(isChecked);
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText( this, "the value is now: " +isChecked, duration);
             toast.show();
         });
+
+        variableBinding.myimagebutton.setOnClickListener( (click) -> {
+                    int width = variableBinding.myimagebutton.getMeasuredWidth();
+                    int height = variableBinding.myimagebutton.getMeasuredWidth();
+                    Toast.makeText(this, "The width = " + width + " and height = " + height, Toast.LENGTH_SHORT).show();
+                });
 
         //TextView mytext =  variableBinding.textview;
         //Button btn = findViewById(R.id.mybutton);
