@@ -3,4 +3,8 @@
     <string name="app_name">Madhumita\'s Android Labs</string>
     <string name="hello_message">Hello World!</string>
     <string name="button_message">I\'m a button</string>
+    <string name="button1">Button</string>
+    <string name="button2">Button</string>
+    <string name="button3">Button</string>
+
 </resources>
