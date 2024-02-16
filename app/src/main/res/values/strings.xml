@@ -2,4 +2,8 @@
     <string name="app_name">Madhumita\'s Android Labs</string>
     <string name="hello_message">Hello World!</string>
     <string name="button_message">I\'m a button</string>
+    <string name="textview">TextView</string>
+    <string name="login">Login</string>
+    <string name="pass">Type your password</string>
+    <string name="email">Enter your email here</string>
 </resources>
