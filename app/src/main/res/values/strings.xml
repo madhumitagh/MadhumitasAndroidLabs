@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Madhumita\'s Android Labs</string>
-    <string name="hello_message">Hello World!</string>
-    <string name="button_message">I\'m a button</string>
+    <string name="hello_message">Type your Password</string>
+    <string name="button_message">Login</string>
+    <string name="button" translatable="false">LOGIN</string>
+    <string name="typepassword" translatable="false">Type your password:</string>
+    <string name="password_meets_requirements" translatable="false">Your password is complex enough</string>
+    <string name="password_does_not_meet_requirements" translatable="false">You shall not pass!</string>
+    <string name="password_missing_uppercase" translatable="false">The password is missing an uppercase letter.</string>
+    <string name="password_missing_lowercase" translatable="false">The password is missing a lowercase letter.</string>
+    <string name="password_missing_number" translatable="false">The password is missing a number.</string>
+    <string name="password_missing_special_char" translatable="false">The password is missing a special character</string>
 </resources>
