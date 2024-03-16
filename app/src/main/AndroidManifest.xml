@@ -12,6 +12,9 @@
         android:theme="@style/Theme.MadhumitasAndroidLabs"
         tools:targetApi="31">
         <activity
+            android:name=".ChatMessage"
+            android:exported="false" />
+        <activity
             android:name=".ChatRoomViewModel"
             android:exported="true">
             <intent-filter>

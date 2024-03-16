@@ -7,36 +7,44 @@
     tools:context=".ChatRoom">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/edittext_id"
         android:layout_width="268dp"
         android:layout_height="24dp"
+        android:ems="10"
+        android:inputType="text"
         android:hint=""
-        android:text="hello"
-        tools:layout_editor_absoluteX="109dp"
-        tools:layout_editor_absoluteY="745dp" />
-
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        tools:ignore="UnknownId" />
     <Button
         android:id="@+id/button2"
         android:layout_width="96dp"
         android:layout_height="55dp"
         android:text="SEND"
-        tools:layout_editor_absoluteX="13dp"
-        tools:layout_editor_absoluteY="730dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RECIEVE"
-        tools:layout_editor_absoluteX="377dp"
-        tools:layout_editor_absoluteY="730dp" />
+        android:layout_marginEnd="4dp"
+        android:text="RECEIVE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
