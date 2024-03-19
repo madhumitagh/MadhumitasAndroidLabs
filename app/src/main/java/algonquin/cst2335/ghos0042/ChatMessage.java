@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+@Entity
 public class ChatMessage {
+    @ColumnInfo(name="message")
     private String message;
     private String timeSent;
     private boolean isSentButton;
