@@ -26,6 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -43,20 +45,29 @@ public class ChatRoom extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MessageDatabase db = Room.databaseBuilder(getApplicationContext(), MessageDatabase.class, "database-name").build();
+        ChatMessageDAO mDAO = db.cmDAO();
         chatModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
         messages = chatModel.messages.getValue();
         if(messages == null)
         {
             chatModel.messages.postValue( messages = new ArrayList<ChatMessage>());
+            Executor thread = Executors.newSingleThreadExecutor();
+            thread.execute(() -> {  /*this runs in another thread*/
+                messages.addAll( mDAO.getAllMessages() ); //Once you get the data from database
+
+                runOnUiThread( () ->  binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
+            });
         }
         binding = ActivityChatRoomBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         binding.sendButton.setOnClickListener(click ->{
-            messages.add(new ChatMessage(binding.textInput.getText().toString(),currentDateAndTime,true));
+            ChatMessage message = new ChatMessage(binding.textInput.getText().toString(),currentDateAndTime,true);
+            messages.add(message);
             myAdapter.notifyItemInserted(messages.size()-1);
             binding.textInput.setText("");
-
+            new Thread(()-> mDAO.insertMessage(message)).start();
         });
 
         binding.receiveButton.setOnClickListener(click ->{
@@ -64,7 +75,7 @@ public class ChatRoom extends AppCompatActivity {
             messages.add(message);
             myAdapter.notifyItemInserted(messages.size() - 1);
             binding.textInput.setText("");
-
+            new Thread(()-> mDAO.insertMessage(message)).start();
         });
         binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
 
@@ -96,7 +107,7 @@ public class ChatRoom extends AppCompatActivity {
             }
             public int getItemViewType(int position){
                 ChatMessage message = messages.get(position);
-                if (messages.get(position).isSentButton()){
+                if (message.isSentButton()){
                     return 0;
                 } else {
                     return 1;
@@ -110,7 +121,29 @@ public class ChatRoom extends AppCompatActivity {
         TextView timeText;
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
-            messageText = itemView.findViewById(R.id.message);
+            itemView.setOnClickListener(clk->{
+                int position = getAbsoluteAdapterPosition();
+                AlertDialog.Builder builder = new AlertDialog.Builder( ChatRoom.this );
+                builder.setMessage("Do you want to delete the message: " + messageText.getText())
+                        .setTitle("Question")
+                        .setNegativeButton("No", (dialog,cl) ->{})
+                        .setPositiveButton("Yes",(dialog,cl) ->{
+
+                            ChatMessage removedMessage = messages.get(position);
+
+                            messages.remove(position);
+                            myAdapter.notifyItemRemoved(position);
+
+                            Snackbar.make(messageText, "You deleted message #" + position, Snackbar.LENGTH_LONG)
+                                    .setAction("Undo", click ->{
+                                        messages.add(position,removedMessage);
+                                        myAdapter.notifyItemInserted(position);
+                                    })
+                                    .show();
+                        })
+                        .create().show();
+            });
+            messageText = itemView.findViewById(R.id. message);
             timeText = itemView.findViewById(R.id.time);
         }
     }
